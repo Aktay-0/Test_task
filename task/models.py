@@ -3,7 +3,7 @@ from django.db import models
 # Create your models here.
 
 class Story():
-    entrys = []
+    entrys = ["История:", ]
 
     def setEntry(self, entry):
         self.entrys.append(entry)
@@ -17,13 +17,15 @@ class Storage(models.Model):
     balance_story = Story()
 
     def addBalance(change):
-        balance += change
+        self.balance += change
+        self.balance_story.setEntry("Зачисление: " + change)
 
     def subBalance(change):
-        if balance - change < 0:
+        if self.balance - change < 0:
             return False
         else:
-            balance -= change
+            self.balance -= change
+            self.balance_story.setEntry("Списание: " + change)
             return True
 
     def getStory(self):

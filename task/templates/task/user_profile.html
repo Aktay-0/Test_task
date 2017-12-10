@@ -1,0 +1,12 @@
+<html>
+    <head>
+        <title>User profile</title>
+    </head>
+    <body>
+        <p>Баланс: {{storage.balance}}</p>
+
+        {%for entry in storage.balance_story.entrys%}
+        <p>{{entry|linebreaksbr}}</p>
+        {%endfor%}
+    </body>
+</html>
