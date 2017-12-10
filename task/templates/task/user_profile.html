@@ -5,8 +5,9 @@
     <body>
         <p>Баланс: {{storage.balance}}</p>
 
-        {%for entry in storage.balance_story.entrys%}
+        {%for entry in storage.getStory%}
         <p>{{entry|linebreaksbr}}</p>
         {%endfor%}
+
     </body>
 </html>

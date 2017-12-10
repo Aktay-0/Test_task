@@ -9,7 +9,7 @@ class Story():
         self.entrys.append(entry)
 
     def getEntrys(self):
-        return entrys
+        return self.entrys
         
 class Storage(models.Model):
     user = models.ForeignKey('auth.User', on_delete = models.CASCADE)
@@ -29,4 +29,4 @@ class Storage(models.Model):
             return True
 
     def getStory(self):
-        return balance_story.getEntrys()
+        return self.balance_story.getEntrys()
