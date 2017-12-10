@@ -1,32 +1,25 @@
 from django.db import models
 
 # Create your models here.
-
-class Story():
-    entrys = ["История:", ]
-
-    def setEntry(self, entry):
-        self.entrys.append(entry)
-
-    def getEntrys(self):
-        return self.entrys
-        
+   
 class Storage(models.Model):
     user = models.ForeignKey('auth.User', on_delete = models.CASCADE)
     balance = models.FloatField()
-    balance_story = Story()
+    balance_story = models.TextField(blank = True)
 
-    def addBalance(change):
+    def addBalance(self, change):
         self.balance += change
-        self.balance_story.setEntry("Зачисление: " + change)
+        self.balance_story += "Зачисление: " + str(change) + ";"
+        self.save()
 
-    def subBalance(change):
+    def subBalance(self, change):
         if self.balance - change < 0:
             return False
         else:
             self.balance -= change
-            self.balance_story.setEntry("Списание: " + change)
+            self.balance_story += "Списание: " + str(change) + ";"
+            self.save()
             return True
 
     def getStory(self):
-        return self.balance_story.getEntrys()
+        return self.balance_story.split(';')

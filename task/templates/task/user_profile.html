@@ -3,7 +3,18 @@
         <title>User profile</title>
     </head>
     <body>
+        {{message}}
         <p>Баланс: {{storage.balance}}</p>
+
+        <form method="POST">
+            {% csrf_token %}
+
+            <p>Сумма: <input name="summ" type="text" pattern="^\d+(.\d+)?$"></p>
+            <p><button type="submit" name="op" value="0">Зачислить</button>
+            <button type="submit" name="op" value="1">Списать</button></p>
+        </form>
+
+        <p>История: </p>
 
         {%for entry in storage.getStory%}
         <p>{{entry|linebreaksbr}}</p>
